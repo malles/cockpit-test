@@ -1,0 +1,76 @@
+// Copyright (C) YOOtheme GmbH, YOOtheme Proprietary Use License (http://www.yootheme.com/license) */
+
+//
+// Component: Overlay
+//
+// ========================================================================
+
+// Variables
+// ========================================================================
+
+@overlay-area-icon-color: @global-contrast-color;
+
+@overlay-caption-padding: @global-margin;
+@overlay-caption-color: @global-contrast-color;
+
+// Sub-object `uk-overlay-area`
+// ========================================================================
+
+.hook-overlay-area() {
+}
+
+.hook-overlay-area-icon() {
+}
+
+// Sub-object `uk-overlay-area-content`
+// ========================================================================
+
+.hook-overlay-area-content() {
+  h4, h3, h2 {
+    color: @overlay-area-content-color;
+    font-weight: 600;
+    position: relative;
+    top: -20px;
+    -webkit-transition: all 0.6s ease-in-out;
+    transition: all 0.6s ease-in-out;
+  }
+  .uk-overlay:hover & h2,
+  .uk-overlay:hover & h3,
+  .uk-overlay:hover & h4 {
+    top: 0;
+  }
+}
+
+// Sub-object `uk-overlay-caption`
+// ========================================================================
+
+.hook-overlay-caption() {
+}
+
+// Miscellaneous
+// ========================================================================
+
+.hook-overlay-misc() {
+
+  .uk-overlay {
+    overflow: hidden;
+    position: relative;
+  }
+
+  .uk-overlay img {
+    -webkit-transition: all 0.6s ease-in-out;
+    transition: all 0.6s ease-in-out;
+    -webkit-transform-origin: bottom left;
+    transform-origin: bottom left;
+  }
+
+  .uk-overlay:hover .uk-overlay-area {
+    left: 0;
+  }
+
+  .uk-overlay:hover img > {
+    -webkit-transform: scale(1.2) translate(-20px);
+    transform: scale(1.2) translate(-20px);
+  }
+
+}

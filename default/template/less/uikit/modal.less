@@ -1,0 +1,47 @@
+// Copyright (C) YOOtheme GmbH, YOOtheme Proprietary Use License (http://www.yootheme.com/license) */
+
+//
+// Component: Modal
+//
+// ========================================================================
+
+
+// Variables
+// ========================================================================
+
+@modal-z-index:                                 @global-z-index + 10;
+
+@modal-dialog-background:                       @global-background;
+@modal-dialog-margin-vertical: 200px;
+
+// Component
+// ========================================================================
+
+.hook-modal() {}
+
+
+// Sub-object: `uk-modal-dialog`
+// ========================================================================
+
+.hook-modal-dialog() {
+    border-radius: @global-border-radius;
+    box-shadow: 0 0 10px rgba(0,0,0,0.3);
+  min-height: 100px;
+  .uk-modal-buttons  {
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -ms-flex-pack: end;
+    -webkit-justify-content: flex-end;
+    justify-content: flex-end;
+    button {
+      margin: 0 5px;
+    }
+  }
+}
+
+
+// Miscellaneous
+// ========================================================================
+
+.hook-modal-misc() {}
