@@ -1,0 +1,30 @@
+{
+  "name": "cockpit-test",
+  "version": "0.0.0",
+  "authors": [
+    "Matthijs Alles <matthijs@bixie.nl>"
+  ],
+  "description": "Test CMS for Cockpit",
+  "moduleType": [
+    "amd"
+  ],
+  "keywords": [
+    "cockpit",
+    "uikit",
+    "bixie"
+  ],
+  "license": "MIT",
+  "private": false,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "requirejs": "~2.1.14",
+    "uikit": "~2.15.0",
+    "jquery": ">= 1.9.0"
+  }
+}

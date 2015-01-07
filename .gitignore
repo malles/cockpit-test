@@ -1,0 +1,17 @@
+#tools
+.idea/
+.vagrant/
+/node_modules/
+#created dependancies
+/default/vendor/
+/default/cockpit/
+#auto-built
+/default/assets/
+
+#vagrant
+/html
+/puphpet
+!/puphpet
+/puphpet/*
+!/puphpet/config.yaml
+/puphpet.zip
