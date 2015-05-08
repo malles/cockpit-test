@@ -14,18 +14,26 @@ require('cockpit/bootstrap.php');
 
 $app = new Lime\App();
 
+$min = get_registry('minify', 0) ? '.min' : '';
+
 // bind routes
-$app->bind("/", function() use($app) {
-
+$app->bind("/", function() use($app, $min) {
 	$posts = collection('Content')->find(['active'=>true])->sort(['created'=>1])->toArray();
+	$pageTitle = 'scs';
+	$homeContent = collection('Content')->findOne(["title_slug"=>'home']);
 
-	return $app->render('views/index.php with template/template.php', ['posts' => $posts]);
+	return $app->render('views/index.php with template/template.php', [
+		'min' => $min,
+		'posts' => $posts,
+		'pageTitle' => $pageTitle,
+		'homeContent' => $homeContent
+	]);
 });
 
 
-$app->bind("/article/:id", function($params) use($app) {
+$app->bind("/article/:title_slug", function($params) use($app) {
 
-	$post = collection('Content')->findOne(["_id"=>$params['id']]);
+	$post = collection('Content')->findOne(["title_slug"=>$params['title_slug']]);
 
 	return $app->render('views/article.php with template/template.php', ['post' => $post]);
 });

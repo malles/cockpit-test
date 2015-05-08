@@ -3,8 +3,11 @@
 .vagrant/
 /node_modules/
 #created dependancies
-/default/vendor/
-/default/cockpit/
+default/vendor/
+
+default/cockpit/*
+!default/cockpit/custom
+
 #auto-built
 /default/assets/
 

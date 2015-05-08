@@ -10,6 +10,8 @@
  */
 
 /**
+ * @var string $min
+ * @var string $pageTitle
  * @var string $content_for_layout
  */
 ?>
@@ -17,19 +19,24 @@
 <html lang="nl-NL" dir="ltr">
 
 <head>
-	<link rel="stylesheet" href="/assets/css/theme.css" type="text/css" />
-<?php if (get_registry('develop', 0)) : ?>
-	<script data-main="src/js/app" src="/vendor/requirejs/require.js"></script>
-<?php else : ?>
-	<script type="application/javascript" src="/assets/js/app.js" async="true" defer="true"></script>
-<?php endif; ?>
+	<base href="<?php echo $this->routeUrl('/')?>">
+	<title><?php echo $pageTitle; ?></title>
+	<link rel="stylesheet" href="/assets/css/theme<?php echo $min; ?>.css" type="text/css" />
 </head>
 
-<body class="">
+<body class="" data-bix-cockpit="{page:'home'}">
 	<div class="uk-container uk-container-center">
+		<div class="bix-header">
+			<?php region('header') ?>
+		</div>
 		<div class="bix-main">
 			<?php echo $content_for_layout;?>
 		</div>
+		<div class="bix-footer">
+			<?php region('footer');?>
+		</div>
 	</div>
+	<script type="application/javascript" src="/vendor/jquery/dist/jquery<?php echo $min; ?>.js"></script>
+	<script type="application/javascript" src="/assets/js/app<?php echo $min; ?>.js"></script>
 </body>
 </html>
