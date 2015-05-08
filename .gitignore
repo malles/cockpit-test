@@ -9,7 +9,9 @@ default/cockpit/*
 !default/cockpit/custom
 
 #auto-built
-/default/assets/
+default/assets/*
+!default/assets/images
+!default/assets/fonts
 
 #vagrant
 /html
