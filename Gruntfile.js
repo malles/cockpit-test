@@ -64,7 +64,7 @@ module.exports = function (grunt) {
         watch: {
             less: {
                 files: [
-                    '<%= meta.template %>/less/**/*.less'
+                    '<%= meta.less %>/**/*.less'
                 ],
                 tasks: ['less'],
                 options: {

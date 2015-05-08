@@ -10,10 +10,14 @@
  */
 
 /**
+ * @var \Lime\App $app
  * @var array $nieuwsList
  * @var array $homeContent
  */
+
 ?>
+
+<?php include $app->path('layouts:top-a.php');?>
 
 <h1 class="uk-article-title"><?php echo $homeContent['title'];?></h1>
 <?php markdown($homeContent['content']);?>

@@ -91,6 +91,7 @@ apache:
             servername: cockpit.dev
             serveraliases:
                 - www.cockpit.dev
+                - effortless-bull-5906.vagrantshare.com
             docroot: /var/www/default
             port: '80'
             setenv:

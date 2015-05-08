@@ -1,4 +1,60 @@
 
-.bix-main {
-  min-height: 450px;
+//vars
+@bix-circle-size: 75px;
+@list-checked-check-color: @text-success-color;
+@icon-fixed-width: 30px;
+
+
+.bix-circle {
+  width: @bix-circle-size;
+  height: @bix-circle-size;
+  border-radius: 50%;
+  background-color: @global-site-color1;
+}
+
+/*bixie icon*/
+@font-face {
+  font-family: 'bixie';
+  src:url('../fonts/bixie.eot?402vpn');
+  src:url('../fonts/bixie.eot?#iefix402vpn') format('embedded-opentype'),
+  url('../fonts/bixie.woff?402vpn') format('woff'),
+  url('../fonts/bixie.ttf?402vpn') format('truetype'),
+  url('../fonts/bixie.svg?402vpn#bixie') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+.hook-icon-misc() {
+
+  [class*='uk-icon-bix'] {
+    font-family: bixie;
+  }
+
+  .uk-icon-bixie:before   { content: "\e600"; }
+
+  .uk-icon-fixed {
+    width: @icon-fixed-width;
+    text-align: center;
+  }
+
+}
+
+/*list-checked*/
+.hook-list-misc() {
+  .uk-list-checked > li {
+    position: relative;
+    padding-left: 20px;
+    &:before {
+      position: absolute;
+      left: 0;
+      content: "\f00c";
+      font-family: "FontAwesome";
+      font-size: 14px;
+      line-height: 23px;
+      color: @list-checked-check-color;
+    }
+  }
+  > li:nth-child(n+2) {
+    margin-top: @list-line-margin-top;
+  }
+
 }

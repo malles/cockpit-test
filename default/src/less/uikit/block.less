@@ -1,0 +1,60 @@
+// Name:            Block
+// Description:     Defines styles to create horizontal layout blocks
+//
+// Component:       `uk-block`
+//
+// Modifiers:       `uk-list-line`
+//                  `uk-list-striped`
+//                  `uk-list-space`
+//
+// ========================================================================
+
+
+// Variables
+// ========================================================================
+
+@block-padding-vertical:                        20px;
+@block-padding-vertical-large:                  50px;
+
+@block-large-padding-vertical:                  @block-padding-vertical;
+@block-large-padding-vertical-medium:           @block-padding-vertical-large;
+@block-large-padding-vertical-large:            100px;
+
+@block-default-background:                      #fff;
+@block-muted-background:                        #f9f9f9;
+@block-primary-background:                      #00a8e6;
+@block-secondary-background:                    #222;
+
+//new
+@block-small-padding-vertical: 20px;
+@block-small-padding-vertical-large: 30px;
+
+// Hooks
+// ========================================================================
+
+.hook-block() {}
+.hook-block-default() {}
+.hook-block-muted() {}
+.hook-block-secondary() {}
+.hook-block-primary() {}
+.hook-block-misc() {
+  /*
+ * Small padding
+ */
+
+  .uk-block-small {
+    padding-top: @block-small-padding-vertical;
+    padding-bottom: @block-small-padding-vertical;
+  }
+
+  /* Desktop and bigger */
+  @media (min-width: @breakpoint-large) {
+
+    .uk-block-small {
+      padding-top: @block-small-padding-vertical-large;
+      padding-bottom: @block-small-padding-vertical-large;
+    }
+
+  }
+
+}

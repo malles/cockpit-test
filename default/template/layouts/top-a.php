@@ -10,5 +10,8 @@
  */
 
 ?>
-
-top-a
+<div class="uk-grid uk-grid-width-1-2 uk-grid-width-medium-1-4 uk-grid-match">
+	<?php foreach(cockpit('regions:group', 'top-a') as $region) : ?>
+		<div><?php region($region['name']); ?></div>
+	<?php endforeach; ?>
+</div>
