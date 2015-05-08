@@ -12,8 +12,7 @@ module.exports = function (grunt) {
             less: 'default/src/less',
             vendor: 'default/vendor',
             template: 'default/template',
-            assets: 'default/assets',
-            langs: ['nl-NL']
+            assets: 'default/assets'
         },
         concat: {
             options: {
