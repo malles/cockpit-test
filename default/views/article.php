@@ -25,7 +25,7 @@
 
 		<?php if (isset($post['teaser'])) markdown($post['teaser']); ?>
 
-		<?php markdown($post['content']);?>
+		<?php if (!empty($post['content'])) markdown($post['content']);?>
 	<?php if (!empty($post['related']) || !empty($post['tags'])) : ?>
 	<div class="uk-grid">
 		<div class="uk-width-medium-1-2">

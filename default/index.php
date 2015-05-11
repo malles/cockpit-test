@@ -9,11 +9,15 @@
  *
  */
 
+// set default timezone
+date_default_timezone_set('UTC');
+
 // make cockpit api available
 require('cockpit/bootstrap.php');
 
 $app = new Lime\App();
 $app->path('layouts', __DIR__ . '/template/layouts');
+$app->path('views', __DIR__ . '/views');
 
 require('template/template.config.php');
 
@@ -22,9 +26,22 @@ $app->bind("/", function() use($app, $baseVars) {
 	$nieuwsList = collection('Nieuws')->find(['active'=>true])->sort(['created'=>1])->toArray();
 	$homeContent = collection('Content')->findOne(["title_slug"=>'home']);
 
+	$limit = get_registry('newsCount', 3);
+	$page  = $app->param('page', 1);
+	$count = collection('Nieuws')->count(['active'=>true]);
+	$pages = ceil($count/$limit);
+	// get posts
+	$nieuwsList = collection('Nieuws')->find(['active'=>true]);
+	// apply pagination
+	$nieuwsList->limit($limit)->skip(($page-1) * $limit);
+	// apply sorting
+	$nieuwsList->sort(["created"=>1]);
+
 	return $app->render('views/index.php with template/template.php', array_merge($baseVars, [
-		'nieuwsList' => $nieuwsList,
-		'homeContent' => $homeContent
+		'nieuwsList' => $nieuwsList->toArray(),
+		'homeContent' => $homeContent,
+		'page'=>$page,
+		'pages'=>$pages
 	]));
 });
 
@@ -37,7 +54,7 @@ $app->bind("/informatie/rollendatabase", function() use($app, $baseVars) {
 	$baseVars['view'] = 'informatie';
 	$baseVars['pageHeader'] = 'Rollendatabase';
 
-	return $app->render('views/overview.php with template/template.php', array_merge($baseVars, [
+	return $app->render('views:overview.php with template/template.php', array_merge($baseVars, [
 		'collections' => $collections
 	]));
 });
@@ -61,7 +78,7 @@ $app->bind("/tags/:tag_slug", function($params) use($app, $baseVars) {
 	$baseVars['pageHeader'] = $tag;
 	$baseVars['pageTitle'] = $tag. get_registry('pageTitleSeperator', '') . get_registry('pageTitleSuffix', '');
 
-	return $app->render('views/links.php with template/template.php',  array_merge($baseVars, [
+	return $app->render('views:links.php with template/template.php',  array_merge($baseVars, [
 		'items' => $items
 	]));
 
@@ -79,7 +96,7 @@ foreach ($baseVars['views'] as $view=>$viewInfo) {
 		$items = collection($viewInfo[1])->find(['active'=>true])->sort(['created'=>1])->toArray();
 		$baseVars['pageTitle'] = $baseVars['pageHeader']. get_registry('pageTitleSeperator', '') . get_registry('pageTitleSuffix', '');
 
-		return $app->render('views/'.$viewInfo[0].'.php with template/template.php', array_merge($baseVars, [
+		return $app->render('views:'.$viewInfo[0].'.php with template/template.php', array_merge($baseVars, [
 			'items' => $items
 		]));
 	});
@@ -90,12 +107,50 @@ foreach ($baseVars['views'] as $view=>$viewInfo) {
 		$post = collection($viewInfo[1])->findOne(["title_slug"=>$params['title_slug']]);
 		$baseVars['pageTitle'] = $post['title'] . get_registry('pageTitleSeperator', '') . get_registry('pageTitleSuffix', '');
 
-		return $app->render('views/article.php with template/template.php',  array_merge($baseVars, [
+		return $app->render('views:article.php with template/template.php',  array_merge($baseVars, [
 			'post' => $post
 		]));
 	});
 
 }
+
+// handle error pages
+$app->on("after", function() use ($app, $baseVars) {
+
+	switch ($app->response->status) {
+		case 500:
+
+			if ($app['debug']) {
+
+				if ($app->req_is('ajax')) {
+					$app->response->body = json_encode(['error' => json_decode($app->response->body, true)]);
+				} else {
+					$app->response->body = $this->render('views:error/500-debug.php', array_merge($baseVars, [
+						'error' => json_decode($app->response->body, true)
+					]));
+				}
+
+			} else {
+
+				if ($app->req_is('ajax')) {
+					$app->response->body = '{"error": "500", "message": "system error"}';
+				} else {
+					$app->response->body = $app->render('views:error/500.php with template/template.php',  $baseVars);
+				}
+			}
+
+			break;
+
+		case 404:
+
+			if ($app->req_is('ajax')) {
+				$app->response->body = '{"error": "404", "message":"File not found"}';
+			} else {
+				$app->response->body = $app->render('views:error/404.php with template/template.php',  $baseVars);
+			}
+			break;
+	}
+});
 
 
 $app->run();

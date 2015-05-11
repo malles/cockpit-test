@@ -23,11 +23,11 @@ $count = 0;
 foreach ($items as $post): ?>
 	<article>
 		<h1 class="uk-article-title"><a href="<?php $this->route('/'. $view .'/'.$post['title_slug']);?>"><?php echo $post['title'];?></a></h1>
-		<?php if ($post['subline']) : ?>
+		<?php if (!empty($post['subline'])) : ?>
 		    <p class="uk-article-lead"><?php echo $post['subline'];?></p>
 		<?php endif; ?>
-		<?php markdown($post['teaser']); ?>
-		<?php if ($post['date']) : ?>
+		<?php if (!empty($post['teaser'])) markdown($post['teaser']); ?>
+		<?php if (!empty($post['date'])) : ?>
 			<p class="uk-article-meta">Gepubliceerd op <?php echo date_format(date_create_from_format('Y-m-d', $post['date']), 'd M Y');?></p>
 		<?php endif; ?>
 	</article>

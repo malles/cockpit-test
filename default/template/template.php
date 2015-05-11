@@ -87,7 +87,8 @@
 			</div>
 		</section>
 	</div>
-	<script type="application/javascript" src="/vendor/jquery/dist/jquery<?php echo $min; ?>.js"></script>
-	<script type="application/javascript" src="/assets/js/app<?php echo $min; ?>.js"></script>
+	<script src="/vendor/jquery/dist/jquery<?php echo $min; ?>.js"></script>
+	<script src="/assets/js/app<?php echo $min; ?>.js"></script>
+	<script src="cockpit/index.php/rest/api-js?token=24851523e240cfac23a09c0b "></script>﻿
 </body>
 </html>
